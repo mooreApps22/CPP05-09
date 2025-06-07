@@ -1,55 +1,68 @@
-NAME = phonebook 
-
-INC = ./inc
-HEADERS = $(INC)/Contact.hpp $(INC)/PhoneBook.hpp 
-
-CC = g++
-CFLAGS = -Wall -Werror -Wextra -g -std=c++98
-
 RED = \033[0;31m
 GREEN = \033[0;32m
 YELLOW = \033[0;33m
-NC = \033[0m
+BLUE = \033[0;34m
+PURPLE = \033[0;35m
+CYAN = \033[0;36m
+NORMAL = \033[0m
 
+NAME = try
+CPP = c++
+FLAGS = -Wall -Wextra -Werror -std=c++98 -Wshadow -g3
+INC_DIR = ./inc
+HEADERS = $(INC_DIR)/Bureaucrat.hpp
+			
 SRC_DIR = ./src
-OBJ_DIR = ./bin
-
-SRCS = $(SRC_DIR)/main.cpp 
-#	$(SRC_DIR)/utils/utils.cpp \
-#	$(SRC_DIR)/utils/utils2.cpp
-
+SRCS = $(SRC_DIR)/main.cpp \
+			$(SRC_DIR)/Bureaucrat.cpp
+			
+OBJ_DIR = ./obj
 OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
-
+$(info SRCS = $(SRCS))
+$(info OBJS = $(OBJS))
 all: $(OBJ_DIR) $(NAME)
 
+
 $(OBJ_DIR):
-	@echo "${YELLOW}Creating object directory $(OBJ_DIR)...${NC}"
+	@echo "${CYAN}Making the directory for object files...${NORMAL}"
 	@mkdir -p $(OBJ_DIR)
-	@echo "${GREEN}Object directory $(OBJ_DIR) created.${NC}"
+	@echo "${GREEN}    $(OBJ_DIR) was successfully created.${NORMAL}"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
+	@echo "${YELLOW}Compiling $< into $@...${NORMAL}"
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) -I$(INC) -c $< -o $@
+	@$(CPP) $(FLAGS) -I$(INC_DIR) -c $< -o $@
+	@echo "${GREEN}    $@ successfully compiled.${NORMAL}"
 
 $(NAME): $(OBJS)
-	@echo "${YELLOW} Linking $(NAME)...${NC}"
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-	@echo "${GREEN} $(NAME) executable created.${NC}"
+	@echo "${YELLOW}Building $(NAME) and linking .o files...${NORMAL}"
+	$(CPP) $(FLAGS) $(OBJS) -o $(NAME)
+	@echo "${GREEN}    $(NAME) successfully built and .o files linked.${NORMAL}"
 
 clean:
-	@echo "${YELLOW}Removing object files...${NC}"
+	@echo "${PURPLE}Deleting $(OBJ_DIR) and .o files...${NORMAL}"
 	@rm -rf $(OBJ_DIR)
-	@echo "${GREEN}Object files removed.${NC}"
+	@echo "${GREEN}    $(OBJ_DIR) and .o files successfully deleted.${NORMAL}"
 
-fclean:
-	@echo "${YELLOW}Removing object files...${NC}"
-	@rm -rf $(OBJ_DIR)
-	@echo "${GREEN}Object files removed.${NC}"
-	@echo "${YELLOW}Removing $(Name) executable...${NC}"
-	@rm -f $(NAME)
-	@echo "${GREEN}$(NAME) executable removed.${NC}"
+fclean: clean
+	@echo "${RED}Deleting $(NAME)...${NORMAL}"
+	@rm $(NAME)
+	@echo "${GREEN}    $(NAME) successfully deleted.${NORMAL}"
 
 re: fclean all
+	@echo "${BLUE}Relinking $(NAME)...${NORMAL}"
+	@echo "${GREEN}    $(NAME) successfully relinked.${NORMAL}"
 
-.PHONY: all clean fclean re phonebook
+colors:
+	@echo "${RED}xxxx...${NORMAL}"
+	@echo "${GREEN}xxxx...${NORMAL}"
+	@echo "${YELLOW}xxxx...${NORMAL}"
+	@echo "${BLUE}xxxx...${NORMAL}"
+	@echo "${PURPLE}xxxx...${NORMAL}"
+	@echo "${CYAN}xxxx...${NORMAL}"
+
+valgrind:
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+
+.PHONY: all clean fclean re

@@ -11,11 +11,13 @@ CPP = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98 -Wshadow -g3
 INC_DIR = ./inc
 HEADERS = $(INC_DIR)/Bureaucrat.hpp \
+			$(INC_DIR)/Form.hpp \
 			$(INC_DIR)/data.hpp
 			
 SRC_DIR = ./src
 SRCS = $(SRC_DIR)/main.cpp \
 			$(SRC_DIR)/data.cpp \
+			$(SRC_DIR)/Form.cpp \
 			$(SRC_DIR)/Bureaucrat.cpp
 			
 OBJ_DIR = ./obj

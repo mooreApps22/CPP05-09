@@ -10,17 +10,24 @@ NAME = forms
 CPP = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98 -Wshadow -g3
 INC_DIR = ./inc
+
 HEADERS = $(INC_DIR)/Bureaucrat.hpp \
 			$(INC_DIR)/AForm.hpp \
 			$(INC_DIR)/ShrubberyCreationForm.hpp \
+			$(INC_DIR)/FormSource.hpp \
+			$(INC_DIR)/IFormSource.hpp \
 			$(INC_DIR)/data.hpp
 			
 SRC_DIR = ./src
 SRCS = $(SRC_DIR)/main.cpp \
-			$(SRC_DIR)/data.cpp \
 			$(SRC_DIR)/AForm.cpp \
+			$(SRC_DIR)/Bureaucrat.cpp \
+			$(SRC_DIR)/BureaucratExceptions.cpp \
+			$(SRC_DIR)/data.cpp \
+			$(SRC_DIR)/FormSource.cpp \
 			$(SRC_DIR)/ShrubberyCreationForm.cpp \
-			$(SRC_DIR)/Bureaucrat.cpp
+			$(SRC_DIR)/ShrubberyCreationFormExceptions.cpp
+
 			
 OBJ_DIR = ./obj
 OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)

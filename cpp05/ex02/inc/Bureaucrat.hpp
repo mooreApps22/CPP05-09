@@ -1,8 +1,8 @@
 #pragma once
 # include <iostream>
-# include "Form.hpp" 
+# include "AForm.hpp" 
 
-class	Form;
+class	AForm;
 
 class Bureaucrat
 {
@@ -20,8 +20,8 @@ class Bureaucrat
 		int			getGrade() const;
 		void		incrementGrade();
 		void		decrementGrade();
-
-		void		signForm(Form& form);
+		void		signForm(AForm& form);
+		void		executeForm(AForm const & form) const;
 		
 		class GradeTooLowException : public std::exception
 		{

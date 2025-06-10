@@ -1,10 +1,10 @@
 #include "ShrubberyCreationForm.hpp"
-#include "ShrubberyCreationFormExceptions.hpp"
+#include "ShrubberyCreationFormExceptions.cpp"
 #include "Bureaucrat.hpp"
 
 // Special Member Methods
 
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm("GG42", 20, 20) {}
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("shrubbery", 145, 137) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& name, int gradeRequiredToSign, int gradeRequiredToExec)
 	:	_name( name),
@@ -13,9 +13,9 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string& name, int gradeR
 		_gradeRequiredToExec( gradeRequiredToExec)
 {
 	if (gradeRequiredToSign < 1 || gradeRequiredToExec < 1)	
-		throw GradeTooHighException();
+		throw GradeTooHighSignException();
 	if (gradeRequiredToSign > 150 || gradeRequiredToExec > 150)
-		throw GradeTooLowException();
+		throw GradeTooLowSignException();
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)

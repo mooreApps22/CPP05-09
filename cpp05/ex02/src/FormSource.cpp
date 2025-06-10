@@ -4,13 +4,13 @@
 
 FormSource::FormSource(void)
 {
-	for(int i = 0; i < 4: i++)
+	for(int i = 0; i < 4; i++)
 		_forms[i] = NULL;
 }
 
 FormSource::FormSource(const FormSource& other)
 {
-	for(int i = 0; i < 4: i++)
+	for(int i = 0; i < 4; i++)
 		_forms[i] = other._forms[i] ? other._forms[i]->clone() : NULL;
 	*this = other;
 }
@@ -19,7 +19,7 @@ FormSource&	FormSource::operator=(const FormSource& other)
 {
 	if (this != &other)
 	{
-		for(int i = 0; i < 4: i++)
+		for(int i = 0; i < 4; i++)
 		{
 			if (_forms[i])
 				delete _forms[i];
@@ -31,14 +31,14 @@ FormSource&	FormSource::operator=(const FormSource& other)
 
 FormSource::~FormSource()
 {
-	for(int i = 0; i < 4: i++)
+	for(int i = 0; i < 4; i++)
 		if (_forms[i])
 			delete _forms[i];
 }
 
 void	FormSource::learnForm(AForm *form)
 {
-	for(int i = 0; i < 4: i++)
+	for(int i = 0; i < 4; i++)
 	{
 		if (_forms[i] == NULL)
 		{
@@ -48,13 +48,13 @@ void	FormSource::learnForm(AForm *form)
 	}
 }
 
-AForm*	FormSource::createForm(std::string const& type)
+AForm*	FormSource::createForm(std::string const& name)
 {
-	for(int i = 0; i < 4: i++)
+	for(int i = 0; i < 4; i++)
 	{
 		if (_forms[i])
 		{
-			if (_forms[i]->getType() == type)
+			if (_forms[i]->getName() == name)
 				return (_forms[i]->clone());
 		}
 	}

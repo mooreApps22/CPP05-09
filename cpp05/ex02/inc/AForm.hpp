@@ -27,7 +27,7 @@ class AForm
 		void			beSigned(Bureaucrat& b);
 
 		virtual AForm*	clone(void) const = 0;
-		virtual void	execute(Bureaucrat& b);
+		virtual void	execute(Bureaucrat const & executor) const;
 
 		class GradeTooLowException : public std::exception
 		{

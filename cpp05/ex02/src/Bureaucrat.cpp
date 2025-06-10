@@ -1,5 +1,6 @@
-#include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "../inc/Bureaucrat.hpp"
+#include "BureaucratExceptions.cpp"
+#include "../inc/Form.hpp"
 
 // Special Member Methods
 
@@ -42,7 +43,8 @@ int		Bureaucrat::getGrade() const
 
 // Modus Operandi
 
-void	Bureaucrat::signForm(Form& form)
+
+void	Bureaucrat::signForm(AForm& form)
 {
 	form.beSigned(*this);
 	if (form.getIsSigned())
@@ -70,14 +72,9 @@ void	Bureaucrat::decrementGrade()
 	_grade++;
 }
 
-// Exceptions
-
-const char*	Bureaucrat::GradeTooLowException::what() const throw()
+void	Bureaucrat::executeForm(AForm const & form) const
 {
-	return ("Grade too low! Grade 150 is the lowest grade possible!");
+	if (_grade <= form.getGradeRequiredToSign())
+		form.execute(*this);
 }
 
-const char*	Bureaucrat::GradeTooHighException::what() const throw()
-{
-	return ("Grade too high! Grade 1 is the highest grade possible!");
-}

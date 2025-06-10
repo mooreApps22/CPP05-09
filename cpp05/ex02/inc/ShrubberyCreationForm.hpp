@@ -28,22 +28,22 @@ class ShrubberyCreationForm : public AForm
 		void			beSigned(Bureaucrat& b);
 
 		virtual AForm*	clone(void) const;
-		void			execute(Bureaucrat& b);
+		void	execute(Bureaucrat const & executor) const;
 
 		// Exception Classes
-		class GradeTooLowException : public std::exception
+		class GradeTooLowSignException : public std::exception
 		{
 			public:
 				const char *what() const throw();
 		};
 
-		class GradeTooHighException : public std::exception
+		class GradeTooHighSignException : public std::exception
 		{
 			public:
 				const char *what() const throw();
 		};
 
-		class GradeInvalidException : public std::exception
+		class GradeInvalidExecException : public std::exception
 		{
 			public:
 				const char *what() const throw();

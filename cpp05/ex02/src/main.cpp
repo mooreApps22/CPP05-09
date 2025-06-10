@@ -1,8 +1,8 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
-#include "IFromSource.hpp"
-#include "FromSource.hpp"
+#include "IFormSource.hpp"
+#include "FormSource.hpp"
 #include "data.hpp"
 
 void	reportCatch(std::exception& e)
@@ -17,18 +17,18 @@ void	inspect(Bureaucrat b)
 
 int	main(void)
 {
-	IFormSource*			src = new FormSource();
-	AForm*					tmp;
-	Bureaucrat				b("Frank", 150);
+	IFormSource*	src = new FormSource();
+	AForm*			tmp;
+	Bureaucrat		b("Frank", 150);
 
 	src->learnForm(new ShrubberyCreationForm());
 	tmp = src->createForm("shrub");
 	try
 	{
-		b->execute(tmp);
+		b = Bureaucrat("Bob", 34);
 		inspect(b);
-		b.signForm(f1);
-		b.execute(f1);
+		b.signForm(*tmp);
+		b.executeForm(*tmp);
 	}
 	catch (std::exception& e)
 	{
